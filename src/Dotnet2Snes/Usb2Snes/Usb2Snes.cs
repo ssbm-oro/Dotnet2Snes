@@ -561,6 +561,7 @@ namespace Dotnet2Snes.Usb2Snes
                 {
                     outputStream = new MemoryStream(ReceiveBufferSize);
                     rcvResult = await _ws.ReceiveAsync(buffer, _cts.Token);
+                    outputStream.Write(buffer, 0, rcvResult.Count);
                     bool isBinary = 
                         rcvResult.MessageType == WebSocketMessageType.Binary;
                     while (!rcvResult.EndOfMessage)
